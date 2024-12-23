@@ -1,4 +1,36 @@
 
+Expert:- https://vueschool.io/cheatsheets/pinia-cheat-sheet
+
+Pinia (Vuex)
+Initialize Pinia into your app
+    src/main.js
+    import { createPinia } from 'pinia'
+    createApp(App).use(createPinia()).mount('#app')
+
+src/stores/ProductStore.js    https://nyxelldev.s3.amazonaws.com/eventMenu/690-4bh1n2hfk32mqeif94hmd5v9d9tpts46ltu4vcb4chnt2disqu9e1gsd0n8b.pdf
+    Define the Store
+    Use the Store (Composition API)
+            <script setup>
+        import { useProductStore } from './stores/ProductStore'
+        const store = useProductStore()
+        </script>
+        <template>
+        <ul>
+        <li v-for="product in store.products">
+        ...
+        </li>
+        </ul>
+        <p>{{ store.productCount }}</p>
+        <ul>
+        <li v-for="product in store.productsCheaperThan(10)">
+        ...
+        </li>
+        </ul>
+        <button @click="store.addProduct( )">Add</butto
+
+
+=============
+
 INTERMEDIATE:- https://vue-cheatsheet.themeselection.com/vue-router/basic.html
 
 Programmatic Navigation
