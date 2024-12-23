@@ -1,0 +1,142 @@
+>> Intro. How many yrs. in Vue ?
+	Have you work on the jexl library ? 
+
+>> Give an example of a named slot in Vue	(Content Projection/Injection)
+>> Give an example of a named view in Vue	// display multiple views at the same time
+	const router = createRouter({
+	  history: createWebHashHistory(),
+	  routes: [
+		{
+		  path: '/',
+		  components: {
+			default: Home,
+			// short for LeftSidebar: LeftSidebar
+			LeftSidebar,
+			// they match the `name` attribute on `<router-view>`
+			RightSidebar,
+		  },
+		},
+	  ],
+	})
+
+	vue
+
+	<template>
+	  <RouterView class="view left-sidebar" name="LeftSidebar"></RouterView>
+	  <RouterView class="view main-content"></RouterView>
+	  <RouterView class="view right-sidebar" name="RightSidebar"></RouterView>
+	</template>
+
+>> Redirect vs Alias in Vue (routing related)
+>> How to pass Props to Route components in Vue 
+>> V-bind what is it ?
+>> Can you give an example of how useRoute can be used?
+>> 
+
+---
+{{ $route.params.id }}
+	1) @click="showPostId" // here it can be this.$route.params.id 
+	-or-
+	<script setup>
+		import {useRoute } from 'vue-router'
+		const route = useRoute()
+		const showPostId = () => {
+			alert(` ${ route.params.id}`)
+		}
+	</script>
+
+---
+Passing Props to Route Components
+vue
+	<script setup lang='ts'>
+	const User = {
+		// make sure to add a prop named exactly like the route param
+		props: ['id'],
+		template: '<div>User {{ id }}</div>'
+	  }
+	  
+	const routes = [
+	  // Boolean mode
+	  { 
+		path: '/user/:id',
+		component: User,
+		props: true
+	  },
+
+	  // Object mode
+	  {
+		path: '/user/:id',
+		components: { default: User, sidebar: Sidebar },
+		props: { default: true, sidebar: false }
+	  },
+		
+	  // Function mode
+	  {
+		path: '/search',
+		component: SearchUser,
+		props: route => ({ query: route.query.q })
+	  }
+	]
+	</script>
+
+---
+
+	>> Tick Tack Toe. Game. Basic UI 4 Buttons. 
+		Clicking 1st button should mark it as X and 
+		2nd button you should mark it as O, 
+		3rd button if clicked, mark it as X and 
+		4th button mark it as O
+	
+---
+
+Differentiate between VARCHAR and VARCHAR2 data types.
+
+Both VARCHAR and VARCHAR2 are used to store variable-length character strings. VARCHAR is a standard SQL data type which works across different relational database systems. Whereas, VARCHAR2 is specific to Oracle.
+
+VARCHAR 2 has several advantages. It is more storage efficient and, unlike VARCHAR, it does not store trailing spaces at the end of a string so avoids potential unexpected results when comparing strings. However,  VARCHAR2 might not be supported non-Oracle database systems.
+
+---
+
+1. Explain the difference between RANK and DENSE_RANK functions in Oracle SQL.
+
+RANK and DENSE_RANK both assign rankings to result rows. 
+
+With RANK, when two or more rows have the same values, they’ll be assigned the same rank, and the subsequent rank will be skipped. 
+
+Meanwhile, DENSE_RANK provides a consecutive ranking and doesn’t leave gaps in ranking even when duplicate values exist.  
+
+---
+
+4. Differentiate between the WHERE clause and the HAVING clause in Oracle SQL. 
+
+The WHERE clause filters rows before grouping – that is, before they’re included in the result set. Filtering is also based on certain conditions. 
+
+The HAVING clause, on the other hand, filters data post-grouping – meaning after aggregation. 
+	
+---
+
+Write an Oracle SQL query to find the names of employees not assigned to any project.
+
+SELECT employee_name
+
+FROM employees
+
+WHERE employee_id NOT IN (SELECT DISTINCT employee_id FROM projects);
+
+---
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
