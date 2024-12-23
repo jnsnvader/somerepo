@@ -1,3 +1,4 @@
+BASIC: https://learnvue.co/LearnVue-Vue-3-Cheatsheet.pdf 
 
 npm init vite-app <project-name>
 cd <project-name>
