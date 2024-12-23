@@ -1,5 +1,6 @@
 >> Intro. How many yrs. in Vue ?
-	Have you work on the jexl library ? 
+	Have you worked on the jexl library ? 
+	Have you worked on Nuxt js ?
 
 >> Give an example of a named slot in Vue	(Content Projection/Injection)
 >> Give an example of a named view in Vue	// display multiple views at the same time
@@ -31,7 +32,14 @@
 >> How to pass Props to Route components in Vue 
 >> V-bind what is it ?
 >> Can you give an example of how useRoute can be used?
->> 
+>> Interprocess communication in Vue JS
+	Parent to Child : using props 
+	Child to Parent : using $emit 	this.$emit('', arg1, arg2)
+	Any comp to any comp : using event bus 	this.$root.$emit('', arg1, arg2 ... );
+		https://medium.com/js-dojo/component-communication-in-vue-js-ca8b591d7efa
+		
+>> Have u worked on Pinia as well ?
+>> life cycle hooks in Vue JS ?
 
 ---
 {{ $route.params.id }}
@@ -122,6 +130,12 @@ SELECT employee_name
 FROM employees
 
 WHERE employee_id NOT IN (SELECT DISTINCT employee_id FROM projects);
+
+---
+
+
+
+
 
 ---
 
