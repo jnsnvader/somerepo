@@ -1,0 +1,273 @@
+
+npm init vite-app <project-name>
+cd <project-name>
+npm install
+npm run dev
+
+Conditional rendering:-
+  <div v-if='date == today'>...</div>
+  <div v-else-if='!done'>...</div>
+  <div v-else>...</div>
+
+  <div v-show='date == today'>...</div> // v-show, all elements already on DOM
+
+Text interpolation:-
+    <span> {{ msg }} </span>
+    <span v-text='msg'></span
+
+    // innerhtml 
+    <span v-html='rawHTML'></span>
+
+ Events 
+    Capture and event and call a method
+    <div v-on:click='count'>Increase</div>
+    <!-- SHORTHAND -->
+    <div @click='count'>Increase</div>
+
+    v-on or @ Listens to DOM events
+    v-bind or : Reactive updates attribute
+    v-model Two way data binding
+    v-once Sets val once; Never update  
+  
+  Event modifiers (usage: v-on:click.stop)
+  .stop Stops event propagation
+  .once Can only trigger event once
+  .prevent Calls evt.preventDefault
+  .self Don't send if target = child
+  
+List :-
+    Basic Loop Over Array
+    <li v-for='item in items' :key='item'>
+    {{ item }}
+    </li>
+
+    Loop and Track Index
+    <li v-for='(item, index) in items'>
+    {{ index }} : {{ item }}
+    </li>
+
+    Loop Values in Object
+    <li v-for='obj in objects'>
+    {{ obj }}
+    </li>
+
+Binding Data:-
+    BINDING DATA
+      Simple Binding
+      <div v-bind:id='objectID'>...</div>
+      <!-- SHORTHAND -->
+      <div :id='objectID'>...</div>
+      Two way binding with data and input
+      <input v-model='email' />
+
+Input Modifiers
+  .lazy updates on change event
+  .trim removes extra whitespace
+  Use Objects to Bind Class/Styles
+  <input :class='{error: hasError}' />
+  <input :style='{margin: space+"px"}' />      
+
+    
+BIND DATA BETWEEN CHILD & PARENT
+    Use v-bind to pass data from parent to child
+    and emit a custom event to send data back.
+
+    In Parent, Bind Data & Set Listener to Update
+      <custom :msg='s' @update='s = $event'/>
+
+    In Child, Send Back Using emit(event, data)
+      context.emit('update', 'hello world')    
+
+SLOTS
+Slots allow for content injection from a parent component to a child component.   
+
+        1) BASIC SLOTS
+      Child Component (MyButton.Vue)
+          <div>
+          Hello World
+          <slot></slot>
+          </div>
+      Parent Component
+          <my-button>
+          This content will replace the slot
+          </my-button>  
+
+  2) Named slots 
+      Child Component (MyButton.Vue)
+          <div>
+          <slot name='top'></slot>
+          <slot name='bottom'></slot>
+          </div>
+          Name Slots in the Parent Component
+          <my-button>
+          <template v-slot:top> // ...
+          </template>
+          <template v-slot:bottom> // ...
+          </template>
+          </my-button>
+  3) SCOPED SLOTS
+          Give parent component access to child data.
+          Child Component (MyButton.Vue)
+          <div>
+          <slot v-bind:post='post'>
+          {{ post.title }}
+          </slot>
+          </div>
+
+          Parent Has Access to MyButton post data
+        <my-button>
+        <template v-slot:default='slotData'>
+        {{ post.author }}
+        </template>
+        </my-button>
+
+DYNAMIC COMPONENTS
+    Changes the rendered component - finds a registered component with the given name.
+    <component :is='componentName'/>
+  
+KEEP-ALIVE ELEMENTS
+Stores a cached version of dynamic components when not visible. Avoids having to create a new component whenever toggled.
+    <keep-alive>
+    <component :is='componentName'/>
+    </keep-alive>
+
+COMPOSITION API
+  Everything returned by setup() is exposed to the template.
+    import { ref, reactive } from 'vue'
+      export default {
+        setup(props, context) {
+          const val = ref('example')
+          const obj = reactive({ count: 0 })
+          const evtHandler = () => {/*...*/}
+          return {
+          val, obj, evtHandler
+          }
+      }
+    }  
+
+SETUP() CONTEXT OBJECT PROPERTIES
+  attrs Has component's attributes
+  slots Has component's slots
+  emit Function to emit events        
+
+VUEJS LIFECYCLE HOOKS
+  *beforeCreate Use setup() instead
+  *created Use setup() instead
+  onBeforeMount Before mounting DOM
+  onMounted DOM can be accessed
+  onBeforeUpdate Reactive data changes
+  onUpdated DOM has been updated
+  onBeforeUnmount Component still complete
+  onUnmounted Teardown complete        
+
+  ex. 
+        import { onMounted } from 'vue'
+          // ...
+          setup() {
+            onMounted(() => {
+            console.log('component mounted!')
+          }
+        }
+
+VUE GLOBAL METHODS
+  mount() Mount component to DOM
+  forceUpdate() Force re-render
+  nextTick() Runs func next update
+  destroy() Destroy component/app                      
+
+COMPUTED PROPERTIES
+A computed property is a value that is  calculated using one or more other properties.
+  setup() {
+  const a = ref(1)
+  const b = computed(() => a.value * 2)
+  return { a, b }
+  }                      
+
+WATCHEFFECT()
+Listens to reactive dependencies and runs a method when one changes. Also runs on init.
+  setup() {
+  const site = ref('learnvue.co')
+  watchEffect(() => {
+  console.log(site.value)
+  })
+  return { site }
+}
+
+TEMPLATE REFS
+Give access to DOM elements.
+  // template
+  <div ref='example'> Example Div </div>
+  // script
+  setup() {
+  const example = ref('learnvue.co')
+  // wait for DOM to mount
+  onMounted(() => {
+  console.log(example.value)
+  })
+  return { example }
+}  
+
+VUE OBJECT API OPTIONS
+If you decide not to use the Composition API, your components will look similar to Vue2 with the Options API.
+  data() Init reactive data
+  props Data visible by parent
+  mixins Declares mixins
+  components Registers children
+  methods Set of Vue methods
+  watchers Watch values for change
+  computed Cached reactive methods
+
+GREAT VUE UI RESOURCES
+  Vuetify Bootstrap Vue UIV
+  VueStrap Vue Material Mint UI
+  Element UI Vuecidity iView
+  Buefy DeepReader KeenUI
+  Quasar AT UI Bulma
+  Fish-UI Muse UI Vue Blu    
+----
+
+8lifecycle hooks: beforecreate, created, beforeMount, mounted, beforeUpdate, updated, beforedestroy, destroyed
+
+v-show : uses DOM behavior, with show
+v-if (lazy behavior), v-if destroys and re-enders
+
+  $parent is used to retrieve the parent component
+  SFCs or single file components 
+      - SFCs have unique names
+      - css support 
+      - preprocessors like babel can be used in SFCs
+
+  State Mgmt Pattern:-
+      - state, view, actions
+
+  How to check if mutation has occured?
+
+  What is a map State helper?
+
+  StyledCompopnents.js can it be used in Vue.js ? Yes. VueJS styled-components.
+
+  Vue CLI: @vue/cli + webpack + plugins
+
+  Instant prototyping?
+
+  What is nextTick method? 
+    - to perform  a function
+
+  What are navigation guards in vue router ?
+    - Global, per-route, in-component
+
+  What are mix-ins?
+    - to flexibily use reuseable components
+
+  Directives in Vue.js
+    - general, liberal, empty, custom directives
+
+  What is vue-loader?
+    - allows us to create SFCs in vue format
+
+  What is virtual DOM ?
+
+  
+  
+
+  
