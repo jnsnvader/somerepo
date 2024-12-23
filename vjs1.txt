@@ -206,6 +206,78 @@ redirecting
           redirect: { name: 'homepage' },
         }
 
+---
+
+Alias
+ts
+
+const routes = [
+  {
+    path: '/users/:id',
+    component: UsersByIdLayout,
+    children: [
+      /* 
+        this will render the UserDetails for these 3 URLs
+          - /users/24
+          - /users/24/profile
+          - /24 
+      */
+      { path: 'profile', component: UserDetails, alias: ['/:id', ''] },
+    ],
+  },
+]
+
+Redirect vs. Alias
+A redirect means when the user visits /home, the URL will be replaced by /, and then matched as /.
+An alias of / as /home means when the user visits /home, the URL remains /home, but it will be matched as if the user is visiting /.
+
+---
+
+Passing Props to Route Components
+vue
+
+<script setup lang='ts'>
+const User = {
+    // make sure to add a prop named exactly like the route param
+    props: ['id'],
+    template: '<div>User {{ id }}</div>'
+  }
+  
+const routes = [
+  // Boolean mode
+  { 
+    path: '/user/:id',
+    component: User,
+    props: true
+  },
+
+  // Object mode
+  {
+    path: '/user/:id',
+    components: { default: User, sidebar: Sidebar },
+    props: { default: true, sidebar: false }
+  },
+    
+  // Function mode
+  {
+    path: '/search',
+    component: SearchUser,
+    props: route => ({ query: route.query.q })
+  }
+]
+</script>
+
+<!-- Via RouterView -->
+<template>
+  <RouterView v-slot="{ Component }">
+    <component
+      :is="Component"
+      view-prop="value"
+    />
+  </RouterView>
+</template>
+
+---
 +++++++++++++++++++++
 
 
