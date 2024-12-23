@@ -197,6 +197,18 @@ vue
   <RouterView class="view right-sidebar" name="RightSidebar"></RouterView>
 </template>
 
+---
+
+redirecting
+    // targeting a named route
+        {
+          path: '/home',
+          redirect: { name: 'homepage' },
+        }
+
++++++++++++++++++++++
+
+
 BASIC: https://learnvue.co/LearnVue-Vue-3-Cheatsheet.pdf 
 
 npm init vite-app <project-name>
